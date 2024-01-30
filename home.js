@@ -39,7 +39,7 @@ let mainform = document.getElementById("MainForm");
 let SignOut = () => {
   sessionStorage.removeItem("user-creds");
   sessionStorage.removeItem("user-info");
-  document.location = "/html/sign_in.html";
+  document.location = "sign_in.html";
 };
 
 // let CheckCred = ()=>{
