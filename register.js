@@ -78,7 +78,7 @@ let RegisterUser = (evt) => {
           alert(error);
         });
 
-      document.location = "/sign_in.html";
+      document.location = "index.html";
     })
     .catch((error) => {
       console.log(error.message);
