@@ -44,7 +44,7 @@ let SignOut = () => {
 
 // let CheckCred = ()=>{
 //     if(!sessionStorage.getItem("user-creds"))
-//     document.location = "sign_in.html"
+//     document.location = "index.html"
 // }
 
 // window.addEventListener('load',CheckCred)
