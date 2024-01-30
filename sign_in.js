@@ -65,7 +65,7 @@ let signInUser = (evt) => {
         }
       );
 
-      document.location = "/html/home.html";
+      document.location = "home.html";
     })
     .catch((error) => {
       console.log(error.message);
