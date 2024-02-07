@@ -55,12 +55,14 @@ let signInUser = (evt) => {
             }))
 
           }
+          document.location = "home.html"
     })
     .catch((error) => {
       alert(error.message);
       console.log(error.message);
       console.log(error.code);
     });
+    
 });
 }
 // Assign btns

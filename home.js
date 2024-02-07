@@ -28,23 +28,23 @@ const auth = getAuth(app);
 let greeting = document.getElementById("greeting");
 let msg = document.getElementById("msg");
 
-let userCreds = JSON.parse(sessionStorage.getItem("user"));
+let userCreds = JSON.parse(sessionStorage.getItem("name"));
 
 
 let sign = document.getElementById("sign-out-btn");
 let mainform = document.getElementById("MainForm");
 
- msg.innerText = `user with name ${userCreds.credentials}`
+//  msg.innerText = `user with name ${userCreds.name}`
 
 let SignOut = () => {
-  sessionStorage.removeItem("user");
+  sessionStorage.removeItem("name");
 
   document.location = "index.html";
 };
 
 // let CheckCred = ()=>{
-//     if(!sessionStorage.getItem("user-creds"))
-//     document.location = "index.html"
+    if(!sessionStorage.getItem("name"))    
+    document.location = "index.html"
 // }
 
 // window.addEventListener('load',CheckCred)
