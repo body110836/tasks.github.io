@@ -75,7 +75,8 @@ let RegisterUser = (evt) => {
         Date_Created: Date.now(),
       })
         .then(() => {
-          alert("you are saved");                            
+          alert("you are saved");      
+          document.location = "home.html"                      
         })
         .catch((error) => {
           alert(error.message);
@@ -83,7 +84,7 @@ let RegisterUser = (evt) => {
           console.log(error.code);
         });
 
-      document.location = "index.html";
+      
     })
 
 };
