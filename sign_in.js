@@ -50,11 +50,12 @@ let signInUser = (evt) => {
     .then((credentials) => {
       function checkAuthState() {
         return new Promise((resolve, reject) => {
-          firebase.auth().onAuthStateChanged(credentials => {
+          onAuthStateChanged(credentials => {
             if (credentials) {
               // User is signed in
               sessionStorage.setItem('user', JSON.stringify(credentials));
               resolve(credentials);
+              window.location.href = 'home.html'
             } else {
               // No user is signed in
               reject('No user signed in');
