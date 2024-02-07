@@ -10,6 +10,7 @@ import {
 import {
   getAuth,
   createUserWithEmailAndPassword,
+  
 } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -51,6 +52,20 @@ let RegisterUser = (evt) => {
     .then((credentials) => {
       console.log(credentials);
       alert("Well Done!" + " " + name.value);
+      set(ref(db, "For Profile/" + credentials.user.uid), {
+        name: name.value,
+        Job_Title: job_title.value,
+        Email: email.value,
+        Gender: gender.value,
+      })
+      .then(()=>{
+        alert("Profile Saved")
+      })  
+      .catch((error) => {
+        alert(error.message);
+        console.log(error.message);
+        console.log(error.code);
+      });                 
 
       set(ref(db, "The Users/" + `The ${position.value}s/` + name.value), {
         Email: email.value,
@@ -60,31 +75,17 @@ let RegisterUser = (evt) => {
         Date_Created: Date.now(),
       })
         .then(() => {
-          alert("you are saved");
-          set(ref(db, "For Profile/" + credentials.user.uid), {
-            name: name.value,
-            Job_Title: job_title.value,
-            Email: email.value,
-            Gender: gender.value,
-          })
-            .then(() => {
-              alert("saved");
-            })
-            .catch((error) => {
-              alert(error);
-            });
+          alert("you are saved");                            
         })
         .catch((error) => {
-          alert(error);
+          alert(error.message);
+          console.log(error.message);
+          console.log(error.code);
         });
 
       document.location = "index.html";
     })
-    .catch((error) => {
-      console.log(error.message);
-      alert("error" + error);
-      console.log(error.code);
-    });
+
 };
 
 // Assign btns

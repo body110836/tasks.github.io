@@ -28,17 +28,17 @@ const auth = getAuth(app);
 let greeting = document.getElementById("greeting");
 let msg = document.getElementById("msg");
 
-let userCreds = JSON.parse(sessionStorage.getItem("user-creds"));
-let userInfo = JSON.parse(sessionStorage.getItem("user-info"));
+let userCreds = JSON.parse(sessionStorage.getItem("user"));
+
 
 let sign = document.getElementById("sign-out-btn");
 let mainform = document.getElementById("MainForm");
 
-//  msg.innerText = `user with name ${userInfo.name}`
+ msg.innerText = `user with name ${userCreds.credentials}`
 
 let SignOut = () => {
-  sessionStorage.removeItem("user-creds");
-  sessionStorage.removeItem("user-info");
+  sessionStorage.removeItem("user");
+
   document.location = "index.html";
 };
 

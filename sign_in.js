@@ -11,6 +11,7 @@ import {
 import {
   getAuth,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -47,33 +48,38 @@ let signInUser = (evt) => {
 
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((credentials) => {
-      get(child(dbref, "For Profile/" + credentials.user.uid)).then(
-        (snapshot) => {
-          if (snapshot.exists) {
-            sessionStorage.setItem(
-              "user-info",
-              JSON.stringify({
-                Name: snapshot.val().Name,
-                Job_Title: snapshot.val().Job_Title,
-              })
-            );
-            sessionStorage.setItem(
-              "user-creds",
-              JSON.stringify(credentials.user)
-            );
-          }
-        }
-      );
+      function checkAuthState() {
+        return new Promise((resolve, reject) => {
+          firebase.auth().onAuthStateChanged(credentials => {
+            if (credentials) {
+              // User is signed in
+              sessionStorage.setItem('user', JSON.stringify(credentials));
+              resolve(credentials);
+            } else {
+              // No user is signed in
+              reject('No user signed in');
+            }
+          });
+        });
+      }
+    
 
-      document.location = "home.html";
-    })
-    .catch((error) => {
-      console.log(error.message);
-      alert("error" + error);
-      console.log(error.code);
-    });
-};
+    //   get(child(dbref, "For Profile/" + credentials.user.uid)).then(
+    //     (snapshot) => {
+    //       if(snapshot.exists){
+    //         sessionStorage.setItem("name",JSON.stringify({
+    //           name:snapshot.val().name
+    //         }))
 
+    //       }
+    // })
+//     .catch((error) => {
+//       alert(error.message);
+//       console.log(error.message);
+//       console.log(error.code);
+//     });
+});
+}
 // Assign btns
 
 btn.addEventListener("click", signInUser);
