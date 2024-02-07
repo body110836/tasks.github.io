@@ -11,7 +11,6 @@ import {
 import {
   getAuth,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -48,37 +47,20 @@ let signInUser = (evt) => {
 
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((credentials) => {
-      function checkAuthState() {
-        return new Promise((resolve, reject) => {
-          onAuthStateChanged(credentials => {
-            if (credentials) {
-              // User is signed in
-              sessionStorage.setItem('user', JSON.stringify(credentials));
-              resolve(credentials);
-              window.location.href = 'home.html'
-            } else {
-              // No user is signed in
-              reject('No user signed in');
-            }
-          });
-        });
-      }
-    
+      get(child(dbref, "For Profile/" + credentials.user.uid)).then(
+        (snapshot) => {
+          if(snapshot.exists){
+            sessionStorage.setItem("name",JSON.stringify({
+              name:snapshot.val().name
+            }))
 
-    //   get(child(dbref, "For Profile/" + credentials.user.uid)).then(
-    //     (snapshot) => {
-    //       if(snapshot.exists){
-    //         sessionStorage.setItem("name",JSON.stringify({
-    //           name:snapshot.val().name
-    //         }))
-
-    //       }
-    // })
-//     .catch((error) => {
-//       alert(error.message);
-//       console.log(error.message);
-//       console.log(error.code);
-//     });
+          }
+    })
+    .catch((error) => {
+      alert(error.message);
+      console.log(error.message);
+      console.log(error.code);
+    });
 });
 }
 // Assign btns
