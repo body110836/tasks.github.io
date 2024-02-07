@@ -28,13 +28,13 @@ const auth = getAuth(app);
 let greeting = document.getElementById("greeting");
 let msg = document.getElementById("msg");
 
-let userCreds = JSON.parse(sessionStorage.getItem("name"));
+
 
 
 let sign = document.getElementById("sign-out-btn");
 let mainform = document.getElementById("MainForm");
 
-//  msg.innerText = `user with name ${userCreds.name}`
+
 
 let SignOut = () => {
   sessionStorage.removeItem("name");
@@ -42,10 +42,7 @@ let SignOut = () => {
   document.location = "index.html";
 };
 
-// let CheckCred = ()=>{
-    if(!sessionStorage.getItem("name"))    
-    document.location = "index.html"
-// }
+
 
 // window.addEventListener('load',CheckCred)
 sign.addEventListener("click", SignOut);
